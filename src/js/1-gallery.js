@@ -92,7 +92,6 @@ function renderGallery() {
   const galleryItems = images.map(createGalleryItem);
   gallery.append(...galleryItems);
 
-  // Initialize SimpleLightbox after adding gallery items to the DOM
   const lightbox = new SimpleLightbox('.gallery a', {
     captionsData: 'alt',
     captionDelay: 250,
