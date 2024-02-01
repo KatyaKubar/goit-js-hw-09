@@ -1,27 +1,29 @@
 const STORAGE_KEY = 'feedback-form-state';
-
 const formEl = document.querySelector('.feedback-form');
 
 formEl.addEventListener('input', onFormInput);
 
 formEl.addEventListener('submit', e => {
   e.preventDefault();
-  const email = formEl.elements.email.value;
-  const message = formEl.elements.message.value;
+  const email = formEl.elements.email.value.trim();
+  const message = formEl.elements.message.value.trim();
+
   if (email !== '' && message !== '') {
     const dataObj = {
       email,
       message,
     };
     console.log(dataObj);
+    localStorage.removeItem(STORAGE_KEY);
+    formEl.reset();
+  } else {
+    alert('Будь-ласка заповніть всі поля форми перед відправкою');
   }
-  localStorage.removeItem(STORAGE_KEY);
-  formEl.reset();
 });
 
 function onFormInput(e) {
-  const email = formEl.elements.email.value.trim();
-  const message = formEl.elements.message.value.trim();
+  const email = formEl.elements.email.value;
+  const message = formEl.elements.message.value;
 
   const dataObj = {
     email,
@@ -50,5 +52,4 @@ function init() {
   formEl.elements.message.value = data.message || '';
   formEl.elements.email.value = data.email || '';
 }
-
 init();
